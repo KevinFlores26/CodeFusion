@@ -1,0 +1,23 @@
+.u-grid {
+  display: grid;
+  grid-template-rows: 49.8% 0.4% 49.8%;
+  grid-template-columns: 49.8% 0.4% 49.8%;
+}
+
+.gutter-col {
+  grid-row: 1/-1;
+  cursor: col-resize;
+}
+
+.gutter-col-1 {
+  grid-column: 2;
+}
+
+.gutter-row {
+  grid-column: 1/-1;
+  cursor: row-resize;
+}
+
+.gutter-row-1 {
+  grid-row: 2;
+}

@@ -1,0 +1,7 @@
+@import url('./base/base.css');
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-primary-bg);
+  color: var(--color-primary-text);
+}
