@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import useCreateEditor from '@hooks/useCreateEditor'
 import Split from 'react-split-grid'
-import '@styles/layouts/editor.css'
 
 export default function Editor() {
   const [html, setHtml] = useState('')
@@ -71,7 +70,6 @@ export default function Editor() {
 
   return (
     <Split
-      minSize={250}
       render={({ getGridProps, getGutterProps }) => (
         <div className='Root-grid u-grid' {...getGridProps()}>
           <div className='Root-editor'>

@@ -1,7 +1,13 @@
 @import url('./base/base.css');
 
 body {
+  min-height: 100vh;
   min-height: 100dvh;
-  background-color: var(--color-primary-bg);
-  color: var(--color-primary-text);
+  min-width: 100vw;
+  min-width: 100dvw;
+  background-color: var(--hex-pr-body);
+  color: var(--hex-pr-text);
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

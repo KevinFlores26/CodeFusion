@@ -1,10 +1,11 @@
 .u-grid {
   display: grid;
-  grid-template-rows: 49.8% 0.4% 49.8%;
-  grid-template-columns: 49.8% 0.4% 49.8%;
+  grid-template-rows: 1fr 10px 1fr;
+  grid-template-columns: 1fr 10px 1fr;
 }
 
 .gutter-col {
+  background-color: var(--hex-editor-pr-sideBarBorder);
   grid-row: 1/-1;
   cursor: col-resize;
 }
@@ -14,6 +15,7 @@
 }
 
 .gutter-row {
+  background-color: var(--hex-editor-pr-sideBarBorder);
   grid-column: 1/-1;
   cursor: row-resize;
 }

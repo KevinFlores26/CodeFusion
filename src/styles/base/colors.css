@@ -1,5 +1,24 @@
+/* 
+* structure => --colorModel-component?-priority-nameOfColor--modifier?
+* Priorities:
+* pr = primary
+* sc = secondary
+*/
+
 :root {
   /* HEX Colors */
-  --color-primary-bg: #d5d5d5;
-  --color-primary-text: #16181a;
+  --hex-pr-body: #d5d5d5;
+  --hex-pr-text: #16181a;
+
+  --hex-pr-text--inverted: #d5d5d5;
+
+  --hex-editor-pr-editor: #262a33;
+  --hex-editor-pr-sideBar: #23262e;
+  --hex-editor-pr-sideBarBorder: #212930;
+  --hex-editor-pr-menus: #16181a;
+
+  /* RGB Components */
+  --rgb-pr-text: 22, 24, 26;
+
+  --rgb-pr-text--inverted: 213, 213, 213;
 }

@@ -1,11 +1,23 @@
 @import url("../main.css");
+@import url("../modules/pg-side-bar.css");
 @import url("../other/split-js.css");
+
+body.enable-motion {
+  background-color: var(--hex-editor-pr-sideBarBorder);
+}
 
 .Root {
   height: 100dvh;
 }
 
+.Root-main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
 .Root-grid {
+  flex-grow: 1;
   height: 100%;
 }
 
@@ -13,8 +25,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-  color: aliceblue;
+  overflow: hidden;
 
   & > div {
     height: 100%;

@@ -13,9 +13,11 @@
     "monaco-editor": "^0.50.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.2.1",
     "react-router-dom": "^6.24.1",
     "react-split-grid": "^1.0.4",
-    "split-grid": "^1.0.11"
+    "split-grid": "^1.0.11",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
