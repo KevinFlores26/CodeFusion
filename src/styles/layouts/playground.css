@@ -1,5 +1,5 @@
 @import url("../main.css");
-@import url("../modules/pg-side-bar.css");
+@import url("../modules/playground/playground.css");
 @import url("../other/split-js.css");
 
 body.enable-motion {

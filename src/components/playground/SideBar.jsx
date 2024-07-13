@@ -1,5 +1,11 @@
-// Icons
-import { useState } from 'react'
+import useSideMenusHandler from '@hooks/useSideMenusHandler'
+import Search from '@components/playground/side-bar/Search'
+import Explorer from '@components/playground/side-bar/Explorer'
+import Packages from '@components/playground/side-bar/Packages'
+import Console from '@components/playground/side-bar/Console'
+import ExportMenu from '@components/playground/side-bar/ExportMenu'
+import ImportMenu from '@components/playground/side-bar/ImportMenu'
+
 import {
   BiFileBlank,
   BiSearch,
@@ -14,71 +20,59 @@ import {
 
 export default function SideBar() {
   const utilsIcons = [
-    { name: 'bar-file', icon: <BiFileBlank className='Sidebar-icon' /> },
-    { name: 'bar-search', icon: <BiSearch className='Sidebar-icon' /> },
-    { name: 'bar-package', icon: <BiPackage className='Sidebar-icon' /> },
-    { name: 'bar-terminal', icon: <BiTerminal className='Sidebar-icon' /> },
-    { name: 'bar-export', icon: <BiExport className='Sidebar-icon' /> },
-    { name: 'bar-import', icon: <BiImport className='Sidebar-icon' /> },
+    { name: 'Explorer', icon: <BiFileBlank className='Sidebar-icon' /> },
+    { name: 'Search', icon: <BiSearch className='Sidebar-icon' /> },
+    { name: 'Packages', icon: <BiPackage className='Sidebar-icon' /> },
+    { name: 'Terminal', icon: <BiTerminal className='Sidebar-icon' /> },
+    { name: 'Export', icon: <BiExport className='Sidebar-icon' /> },
+    { name: 'Import', icon: <BiImport className='Sidebar-icon' /> },
+  ]
+  
+  const preferencesIcons = [
+    { name: 'Home', icon: <BiHome className='Sidebar-icon' /> },
+    { name: 'User', icon: <BiUserCircle className='Sidebar-icon' /> },
+    { name: 'Settings', icon: <BiCog className='Sidebar-icon' /> },
   ]
 
-  const preferencesIcons = [
-    { name: 'bar-home', icon: <BiHome className='Sidebar-icon' /> },
-    { name: 'bar-user', icon: <BiUserCircle className='Sidebar-icon' /> },
-    { name: 'bar-settings', icon: <BiCog className='Sidebar-icon' /> },
-  ]
+  const { contentBar, activeMenu, menusHandler, tooltipHandler } = useSideMenusHandler({ utilsIcons })
 
   let itemCounter = 0
   function renderItem(array) {
     return array.map((item) => (
       <li
         key={`item-barlist-${itemCounter++}_${item.name}`}
-        id={item.name}
-        className={`Sidebar-item ${itemCounter === 0 ? 'Sidebar-item--active' : ''}`}
+        id={`bar-${item.name.toLowerCase()}`}
+        className={`Sidebar-item ${itemCounter === 0 ? 'is-active' : ''}`}
         onClick={menusHandler}
+        onMouseEnter={tooltipHandler.show}
+        onMouseLeave={tooltipHandler.hide}
       >
-        <button className='Sidebar-button'>{item.icon}</button>
+        <button className='Sidebar-button' data-tooltip={item.name}>
+          {item.icon}
+        </button>
       </li>
     ))
   }
 
-  const [previousMenu, setPreviousMenu] = useState(null)
-  const [activeMenu, setActiveMenu] = useState('bar-file')
+  function contentHandler() {
+    if (activeMenu === `bar-${utilsIcons[0].name.toLowerCase()}`) return <Explorer />
+    if (activeMenu === `bar-${utilsIcons[1].name.toLowerCase()}`) return <Search />
+    if (activeMenu === `bar-${utilsIcons[2].name.toLowerCase()}`) return <Packages />
+    if (activeMenu === `bar-${utilsIcons[3].name.toLowerCase()}`) return <Console />
+    if (activeMenu === `bar-${utilsIcons[4].name.toLowerCase()}`) return <ExportMenu />
+    if (activeMenu === `bar-${utilsIcons[5].name.toLowerCase()}`) return <ImportMenu />
 
-  function menusHandler({currentTarget}) {
-    const itemList = document.querySelectorAll('.Sidebar-item')
-    const classNameActive = 'Sidebar-item--active'
-
-    if (currentTarget.classList.contains(classNameActive)) return
-
-    setPreviousMenu(activeMenu)
-    setActiveMenu(currentTarget.id)
-    
-    removeClassItems(itemList, classNameActive, true)
-    currentTarget.classList.add(classNameActive)
-  }
-
-  function removeClassItems(array, className, previous = false) {
-    const classNamePrevious = previous ? `${className}-previous` : ''
-
-    array.forEach((item) => {
-      if (previous) {
-        item.classList.contains(classNamePrevious) ? item.classList.remove(classNamePrevious) : ''
-        item.classList.contains(className) ? item.classList.add(classNamePrevious) : ''
-      }
-      item.classList.remove(className)
-    })
+    return <span>Error: not found</span>
   }
 
   return (
     <aside className='Sidebar'>
       <div className='Sidebar-menus'>
         <ul className='Sidebar-list Sidebar-utils'>{renderItem(utilsIcons)}</ul>
-
         <ul className='Sidebar-list Sidebar-preferences'>{renderItem(preferencesIcons)}</ul>
       </div>
 
-      <div className='Sidebar-content'></div>
+      <div className={`Sidebar-Content ${contentBar ? 'is-active' : ''}`}>{contentHandler()}</div>
     </aside>
   )
 }

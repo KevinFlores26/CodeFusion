@@ -3,17 +3,20 @@
 * Priorities:
 * pr = primary
 * sc = secondary
+* tr = tertiary
 */
 
 :root {
   /* HEX Colors */
   --hex-pr-body: #d5d5d5;
   --hex-pr-text: #16181a;
+  --hex-pr-tooltip: #37393b;
 
   --hex-pr-text--inverted: #d5d5d5;
 
   --hex-editor-pr-editor: #262a33;
   --hex-editor-pr-sideBar: #23262e;
+  --hex-editor-sc-sideBar: #1c1e22;
   --hex-editor-pr-sideBarBorder: #212930;
   --hex-editor-pr-menus: #16181a;
 

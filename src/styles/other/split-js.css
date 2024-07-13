@@ -1,11 +1,21 @@
+/* 
+* React Split Grid CSS
+*/
 .u-grid {
   display: grid;
   grid-template-rows: 1fr 10px 1fr;
   grid-template-columns: 1fr 10px 1fr;
 }
 
-.gutter-col {
+.gutter-col,
+.gutter-row {
   background-color: var(--hex-editor-pr-sideBarBorder);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.gutter-col {
+  background-image: url('/public/img/dragger-y.png');
   grid-row: 1/-1;
   cursor: col-resize;
 }
@@ -15,11 +25,25 @@
 }
 
 .gutter-row {
-  background-color: var(--hex-editor-pr-sideBarBorder);
+  background-image: url('/public/img/dragger-x.png');
   grid-column: 1/-1;
   cursor: row-resize;
 }
 
 .gutter-row-1 {
   grid-row: 2;
+}
+
+/* 
+* React Split CSS
+*/
+.gutter {
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.gutter.gutter-vertical {
+  background-image: url('/public/img/dragger-x.png');
+  cursor: row-resize;
 }

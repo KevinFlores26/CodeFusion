@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/urbanist':
+        specifier: ^5.0.21
+        version: 5.0.21
       monaco-editor:
         specifier: ^0.50.0
         version: 0.50.0
@@ -23,6 +26,9 @@ importers:
       react-router-dom:
         specifier: ^6.24.1
         version: 6.24.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-split:
+        specifier: ^2.0.14
+        version: 2.0.14(react@18.3.1)
       react-split-grid:
         specifier: ^1.0.4
         version: 1.0.4(react@18.3.1)
@@ -224,6 +230,9 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@fontsource-variable/urbanist@5.0.21':
+    resolution: {integrity: sha512-OovhNBmyqatjOOCBa4gsZ8usS+VAMtHdJAzhGMVvo+42Ryjh3DJjbnXrgfp7TF5N6SBPMwmw7ALY3ZdCSvWoDw==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -1149,6 +1158,11 @@ packages:
     peerDependencies:
       react: '*'
 
+  react-split@2.0.14:
+    resolution: {integrity: sha512-bKWydgMgaKTg/2JGQnaJPg51T6dmumTWZppFgEbbY0Fbme0F5TuatAScCLaqommbGQQf/ZT1zaejuPDriscISA==}
+    peerDependencies:
+      react: '*'
+
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
@@ -1227,6 +1241,9 @@ packages:
 
   split-grid@1.0.11:
     resolution: {integrity: sha512-ELtFtxc3r5we5GZfe6Fi0BFFxIi2M6BY1YEntBscKRDD3zx4JVHqx2VnTRSQu1BixCYSTH3MTjKd4esI2R7EgQ==}
+
+  split.js@1.6.5:
+    resolution: {integrity: sha512-mPTnGCiS/RiuTNsVhCm9De9cCAUsrNFFviRbADdKiiV+Kk8HKp/0fWu7Kr8pi3/yBmsqLFHuXGT9UUZ+CNLwFw==}
 
   string.prototype.matchall@4.0.11:
     resolution: {integrity: sha512-NUdh0aDavY2og7IbBPenWqR9exH+E26Sv8e0/eTe1tltDGZL+GtBkDAnnyBtmekfK6/Dq3MkcGtzXFEd1LQrtg==}
@@ -1470,6 +1487,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@fontsource-variable/urbanist@5.0.21': {}
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
@@ -2473,6 +2492,12 @@ snapshots:
       react: 18.3.1
       split-grid: 1.0.11
 
+  react-split@2.0.14(react@18.3.1):
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.3.1
+      split.js: 1.6.5
+
   react@18.3.1:
     dependencies:
       loose-envify: 1.4.0
@@ -2585,6 +2610,8 @@ snapshots:
   source-map-js@1.2.0: {}
 
   split-grid@1.0.11: {}
+
+  split.js@1.6.5: {}
 
   string.prototype.matchall@4.0.11:
     dependencies:
