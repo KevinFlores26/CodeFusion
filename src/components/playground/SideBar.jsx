@@ -23,7 +23,7 @@ export default function SideBar() {
     { name: 'Explorer', icon: <BiFileBlank className='Sidebar-icon' /> },
     { name: 'Search', icon: <BiSearch className='Sidebar-icon' /> },
     { name: 'Packages', icon: <BiPackage className='Sidebar-icon' /> },
-    { name: 'Terminal', icon: <BiTerminal className='Sidebar-icon' /> },
+    { name: 'Console', icon: <BiTerminal className='Sidebar-icon' /> },
     { name: 'Export', icon: <BiExport className='Sidebar-icon' /> },
     { name: 'Import', icon: <BiImport className='Sidebar-icon' /> },
   ]
@@ -72,7 +72,7 @@ export default function SideBar() {
         <ul className='Sidebar-list Sidebar-preferences'>{renderItem(preferencesIcons)}</ul>
       </div>
 
-      <div className={`Sidebar-Content ${contentBar ? 'is-active' : ''}`}>{contentHandler()}</div>
+      <div className={`Sidebar-content SideContent ${contentBar ? 'is-active' : ''}`}>{contentHandler()}</div>
     </aside>
   )
 }

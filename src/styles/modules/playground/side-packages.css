@@ -1,0 +1,53 @@
+.PackageContent {
+  & .PackageContent-search {
+    margin-bottom: 1rem;
+  }
+}
+
+.PackageSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  & .PackageSection-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  & .PackageSection-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    max-height: 6.5rem;
+    background-color: var(--hex-editor-sc-sideBar);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease-out,
+      transform 0.2s ease-out;
+
+    & .PackageSection-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      & .SideContent-small {
+        font-weight: 500;
+        opacity: 0.85;
+      }
+    }
+
+    &:hover {
+      background-color: rgba(var(--rgb-pr-list--hover), 0.75);
+    }
+
+    &:active {
+      transform: scaleX(0.95);
+    }
+  }
+}

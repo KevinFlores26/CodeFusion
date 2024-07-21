@@ -7,10 +7,35 @@
 */
 
 :root {
+  /* Static Colors (only :root) */
+  --hex-static-pr-textDark: #16181a;
+  --hex-static-pr-textLight: #d5d5d5;
+
   /* HEX Colors */
+  --hex-pr-primaryColor: #5b90e6;
+  --hex-sc-primaryColor: #297bcd;
+  --hex-pr-emphasisColor: #b18de0;
+  --hex-sc-emphasisColor: #bb6fe8;
+  --hex-pr-successColor: #7cbf7c;
+  --hex-sc-successColor: #6dd96d;
+  --hex-pr-infoColor: #267bdc;
+  --hex-sc-infoColor: #81b5d7;
+  --hex-pr-logColor: #51647f;
+  --hex-sc-logColor: #8f8bd2;
+  --hex-pr-warningColor: #fe8d59;
+  --hex-sc-warningColor: #f9a888;
+  --hex-pr-errorColor: #e95850;
+  --hex-sc-errorColor: #f5868d;
+
   --hex-pr-body: #d5d5d5;
   --hex-pr-text: #16181a;
+  --hex-pr-textAnchor: #7f93bf;
+  --hex-pr-textAnchor--hover: #a4b3d3;
+  --hex-pr-textEmphasis: #b494c5;
   --hex-pr-tooltip: #37393b;
+  --hex-pr-inputField: #42444d;
+  --hex-pr-button: #2b2d34;
+  --hex-pr-list--hover: #54555b;
 
   --hex-pr-text--inverted: #d5d5d5;
 
@@ -18,10 +43,20 @@
   --hex-editor-pr-sideBar: #23262e;
   --hex-editor-sc-sideBar: #1c1e22;
   --hex-editor-pr-sideBarBorder: #212930;
-  --hex-editor-pr-menus: #16181a;
+  --hex-editor-pr-menus: #15191e;
 
   /* RGB Components */
+  --rgb-pr-infoColor: 38, 123, 220;
+  --rgb-sc-infoColor: 129, 181, 215;
+  --rgb-pr-logColor: 81, 100, 127;
+  --rgb-sc-logColor: 143, 139, 210;
+  --rgb-pr-warningColor: 254, 141, 89;
+  --rgb-sc-warningColor: 249, 168, 136;
+  --rgb-pr-errorColor: 233, 88, 80;
+  --rgb-sc-errorColor: 245, 134, 141;
+
   --rgb-pr-text: 22, 24, 26;
+  --rgb-pr-list--hover: 84, 85, 91;
 
   --rgb-pr-text--inverted: 213, 213, 213;
 }

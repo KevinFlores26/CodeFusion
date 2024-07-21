@@ -1,0 +1,131 @@
+.ConsoleSummary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  & .ConsoleSummary-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: calc(50% - 0.25rem);
+    height: 4rem;
+    background-color: var(--hex-editor-sc-sideBar);
+    border-radius: 0.25rem;
+
+    & .ConsoleSummary-iconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2.5rem;
+      height: 100%;
+      border-radius: 0.25rem 0 0 0.25rem;
+    }
+
+    &.--info .ConsoleSummary-iconContainer {
+      background-color: var(--hex-sc-infoColor);
+    }
+
+    &.--log .ConsoleSummary-iconContainer {
+      background-color: var(--hex-sc-logColor);
+    }
+    
+    &.--warning .ConsoleSummary-iconContainer {
+      background-color: var(--hex-sc-warningColor);
+    }
+    
+    &.--error .ConsoleSummary-iconContainer {
+      background-color: var(--hex-sc-errorColor);
+    }
+
+    & .ConsoleSummary-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.25rem;
+      width: 100%;
+      height: 100%;
+
+      & .ConsoleSummary-type {
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+.ConsoleOutput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 20rem;
+  background-color: var(--hex-editor-sc-sideBar);
+  padding: 1rem;
+  border-radius: 0.25rem;
+
+  & .ConsoleOutput-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem 0.5rem;
+    border-top: 2px solid var(--hex-editor-pr-sideBarBorder);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      border-radius: 0.25rem;
+      transition: width 0.2s ease-out;
+    }
+
+    &.--info::before {
+      background-color: rgba(var(--rgb-sc-infoColor), 0.4);
+      box-shadow: inset 0 0 0.5rem 0.25rem rgba(var(--rgb-pr-infoColor), 0.15);
+    }
+
+    &.--log::before {
+      background-color: rgba(var(--rgb-sc-logColor), 0.4);
+      box-shadow: inset 0 0 0.5rem 0.25rem rgba(var(--rgb-pr-logColor), 0.15);
+    }
+    
+    &.--warning::before {
+      background-color: rgba(var(--rgb-sc-warningColor), 0.4);
+      box-shadow: inset 0 0 0.5rem 0.25rem rgba(var(--rgb-pr-warningColor), 0.15);
+    }
+    
+    &.--error::before {
+      background-color: rgba(var(--rgb-sc-errorColor), 0.4);
+      box-shadow: inset 0 0 0.5rem 0.25rem rgba(var(--rgb-pr-errorColor), 0.15);
+    }
+
+    & .ConsoleContent-icon {
+      width: 1.5cap;
+      height: 1.5cap;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    & .ConsoleOutput-message {
+      flex-grow: 1;
+      text-wrap: wrap;
+      font-family: var(--primary-font);
+      z-index: 1;
+    }
+
+    &:hover {
+      &::before {
+        width: 100%;
+      }
+    }
+  }
+
+  & .ConsoleOutput-item:first-child {
+    border-top: none;
+  }
+}

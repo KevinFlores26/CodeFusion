@@ -1,0 +1,87 @@
+@import url('./side-search.css');
+@import url('./side-packages.css');
+@import url('./side-console.css');
+@import url('./side-ex-import.css');
+@import url('../inputs.css');
+@import url('../button.css');
+@import url('../utils.css');
+
+.SideContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 0;
+  height: 100%;
+  background-color: var(--hex-editor-pr-sideBar);
+  padding: 1.5rem 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: var(--hex-pr-text--inverted);
+  transition:
+    width 0.3s ease-out,
+    padding 0.5s ease-out;
+
+  & .SideContent-strong {
+    font-weight: 600;
+  }
+
+  & .SideContent-small {
+    color: var(--hex-pr-textEmphasis);
+  }
+
+  &.is-active {
+    width: 18.75rem;
+    padding: 1.5rem 1rem;
+  }
+}
+
+.SideContent-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  & .SideContent-description {
+    text-wrap: pretty;
+  }
+
+  & .SideContent-link {
+    font-weight: 600;
+
+    &:hover {
+      font-weight: 800;
+    }
+  }
+}
+
+.SideContent-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  & .SideContent-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+
+    & .SideContent-headingTitle {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      & .SideContent-headingIcon {
+        width: 1.25cap;
+        height: 1.25cap;
+      }
+    }
+  }
+
+  & .SideContent-hr {
+    height: 3px;
+    border-radius: 1px;
+    background-color: var(--hex-pr-textEmphasis);
+    opacity: 0.35;
+  }
+}

@@ -1,0 +1,71 @@
+.u-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  background-color: var(--hex-pr-button);
+  color: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease-out,
+    transform 0.2s ease-out;
+
+  &.--xlSize {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  &.--smSize {
+    padding: 0.25rem 5rem;
+    font-size: 0.75rem;
+  }
+
+  &.--primary {
+    background-color: var(--hex-sc-primaryColor);
+
+    &:hover {
+      background-color: var(--hex-pr-primaryColor);
+    }
+  }
+
+  &.--primaryAlt {
+    background-color: var(--hex-pr-logColor);
+
+    &:hover {
+      background-color: var(--hex-sc-logColor);
+    }
+  }
+
+  &.--success {
+    background-color: var(--hex-sc-successColor);
+    color: var(--hex-static-pr-textDark);
+
+    &:hover {
+      background-color: var(--hex-pr-successColor);
+    }
+  }
+
+  &.--emphasis {
+    background-color: var(--hex-sc-emphasisColor);
+
+    &:hover {
+      background-color: var(--hex-pr-emphasisColor);
+    }
+  }
+
+  & .u-button-icon {
+    width: 2cap;
+    height: 2cap;
+  }
+
+  &:hover {
+    background-color: var(--hex-pr-button--hover);
+  }
+
+  &:active {
+    transform: scaleX(0.95);
+  }
+}

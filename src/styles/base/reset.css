@@ -49,6 +49,22 @@ em {
   color: inherit;
 }
 
+a {
+  display: inline-block;
+  color: var(--hex-pr-textAnchor);
+  transition:
+    color 0.2s,
+    font-weight 0.2s;
+
+  &:hover {
+    color: var(--hex-pr-textAnchor--hover);
+  }
+}
+
+hr {
+  width: 100%;
+}
+
 form,
 input,
 textarea,
@@ -61,6 +77,22 @@ label {
   font-size: inherit;
   color: inherit;
   hyphens: auto;
+
+  &::placeholder {
+    color: inherit;
+    font-weight: inherit;
+    filter: opacity(0.5);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  &:focus-visible {
+    outline: 2px solid var(--hex-pr-primaryColor);
+  }
 }
 
 textarea {
