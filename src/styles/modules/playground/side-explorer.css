@@ -1,0 +1,123 @@
+.ExplorerContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & .ExplorerContent-files {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.5rem;
+  }
+}
+
+.ExplorerList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 20rem;
+  height: auto;
+  max-height: 70%;
+  background-color: var(--hex-editor-sc-sideBar);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  overflow: auto;
+  color: rgba(var(--rgb-pr-text--inverted), 0.75);
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  & .ExplorerList-item {
+    transform-origin: left;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease-out,
+      transform 0.2s ease-out;
+
+    &.--folder {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding: 0;
+    }
+
+    & .ExplorerList-folderWrapper {
+      transform-origin: left;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition:
+        background-color 0.2s ease-out,
+        transform 0.2s ease-out,
+        color 0.2s ease-out;
+
+      & .ExplorerList-folderName {
+        font-weight: 600;
+      }
+
+      &:hover {
+        background-color: rgba(var(--rgb-pr-list--hover), 0.75);
+        color: rgba(255, 255, 255, 1);
+      }
+
+      &:active {
+        transform: scaleX(0.95);
+      }
+    }
+
+    & .ExplorerList-icon {
+      width: 1.5cap;
+      height: 1.5cap;
+    }
+
+    & .ExplorerList-list {
+      width: 100%;
+      padding-left: 0.5rem;
+    }
+
+    &:not(&.--folder) {
+      &:hover {
+        background-color: rgba(var(--rgb-pr-list--hover), 0.75);
+        color: rgba(255, 255, 255, 1);
+      }
+
+      &:active {
+        transform: scaleX(0.95);
+      }
+    }
+  }
+}
+
+.ExplorerRecent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  height: calc(30% - 0.5rem);
+
+  & .ExplorerRecent-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    gap: 0.5rem;
+    width: 100%;
+    background-color: var(--hex-editor-sc-sideBar);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    overflow: auto;
+    color: rgba(var(--rgb-pr-text--inverted), 0.75);
+  }
+}

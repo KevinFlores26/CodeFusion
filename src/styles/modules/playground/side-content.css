@@ -1,3 +1,4 @@
+@import url('./side-explorer.css');
 @import url('./side-search.css');
 @import url('./side-packages.css');
 @import url('./side-console.css');
@@ -7,31 +8,42 @@
 @import url('../utils.css');
 
 .SideContent {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
   width: 0;
   height: 100%;
   background-color: var(--hex-editor-pr-sideBar);
   padding: 1.5rem 0;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   color: var(--hex-pr-text--inverted);
   transition:
     width 0.3s ease-out,
     padding 0.5s ease-out;
 
-  & .SideContent-strong {
-    font-weight: 600;
-  }
+  & .SideContent-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 16.75rem;
+    height: 100%;
+    opacity: 0;
+    transition:
+      opacity 0.3s ease-out;
 
-  & .SideContent-small {
-    color: var(--hex-pr-textEmphasis);
+    & .SideContent-strong {
+      font-weight: 600;
+    }
+
+    & .SideContent-small {
+      color: var(--hex-pr-textEmphasis);
+    }
   }
 
   &.is-active {
     width: 18.75rem;
     padding: 1.5rem 1rem;
+
+    & .SideContent-content {
+      opacity: 1;
+    }
   }
 }
 

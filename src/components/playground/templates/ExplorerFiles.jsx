@@ -15,14 +15,14 @@ import {
 export default function ExplorerFiles({ structureObject }) {
   const icons = useMemo(
     () => ({
-      '/': <BiSolidFolder className='ExplorerContent-fileIcon' />,
-      txt: <BiFile className='ExplorerContent-fileIcon' />,
-      json: <BiSolidFileJson className='ExplorerContent-fileIcon' />,
-      html: <BiLogoHtml5 className='ExplorerContent-fileIcon' />,
-      css: <BiLogoCss3 className='ExplorerContent-fileIcon' />,
-      js: <BiLogoJavascript className='ExplorerContent-fileIcon' />,
-      ts: <BiLogoTypescript className='ExplorerContent-fileIcon' />,
-      jsx: <BiLogoReact className='ExplorerContent-fileIcon' />,
+      '/': <BiSolidFolder className='ExplorerList-icon' />,
+      txt: <BiFile className='ExplorerList-icon' />,
+      json: <BiSolidFileJson className='ExplorerList-icon' />,
+      html: <BiLogoHtml5 className='ExplorerList-icon' />,
+      css: <BiLogoCss3 className='ExplorerList-icon' />,
+      js: <BiLogoJavascript className='ExplorerList-icon' />,
+      ts: <BiLogoTypescript className='ExplorerList-icon' />,
+      jsx: <BiLogoReact className='ExplorerList-icon' />,
     }),
     [],
   )
@@ -191,9 +191,8 @@ export default function ExplorerFiles({ structureObject }) {
               </div>
 
               <ul
-                className='Explorerlist-list'
+                className='ExplorerList-list'
                 data-index={dir.index}
-                style={{ marginLeft: `${(dir.index.split('.').length - 1) * 0.5}rem` }}
               >
                 {renderFiles(biArray[currentSubArray])}
               </ul>

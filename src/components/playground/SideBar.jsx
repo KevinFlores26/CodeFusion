@@ -72,7 +72,9 @@ export default function SideBar() {
         <ul className='Sidebar-list Sidebar-preferences'>{renderItem(preferencesIcons)}</ul>
       </div>
 
-      <div className={`Sidebar-content SideContent ${contentBar ? 'is-active' : ''}`}>{contentHandler()}</div>
+      <div className={`Sidebar-content SideContent ${contentBar ? 'is-active' : ''}`}>
+        <div className='SideContent-content'>{contentHandler()}</div>
+      </div>
     </aside>
   )
 }
