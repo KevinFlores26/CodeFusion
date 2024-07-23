@@ -1,31 +1,27 @@
 import ConsoleSummary from '@components/playground/templates/ConsoleSummary'
 import ConsoleOutput from '@components/playground/templates/ConsoleOutput'
 import { BiInfoCircle, BiCircle, BiError, BiXCircle } from 'react-icons/bi'
-import { useMemo } from 'react'
+
+const OUTPUT_TYPES = {
+  info: {
+    name: 'Info',
+    icon: <BiInfoCircle className='ConsoleContent-icon' fill='var(--hex-pr-infoColor)' />,
+  },
+  log: {
+    name: 'Log',
+    icon: <BiCircle className='ConsoleContent-icon' fill='var(--hex-pr-logColor)' />,
+  },
+  warning: {
+    name: 'Warning',
+    icon: <BiError className='ConsoleContent-icon' fill='var(--hex-pr-warningColor)' />,
+  },
+  error: {
+    name: 'Error',
+    icon: <BiXCircle className='ConsoleContent-icon' fill='var(--hex-pr-errorColor)' />,
+  },
+}
 
 export default function Console() {
-  const OUTPUT_TYPES = useMemo(
-    () => ({
-      info: {
-        name: 'Info',
-        icon: <BiInfoCircle className='ConsoleContent-icon' fill='var(--hex-pr-infoColor)' />,
-      },
-      log: {
-        name: 'Log',
-        icon: <BiCircle className='ConsoleContent-icon' fill='var(--hex-pr-logColor)' />,
-      },
-      warning: {
-        name: 'Warning',
-        icon: <BiError className='ConsoleContent-icon' fill='var(--hex-pr-warningColor)' />,
-      },
-      error: {
-        name: 'Error',
-        icon: <BiXCircle className='ConsoleContent-icon' fill='var(--hex-pr-errorColor)' />,
-      },
-    }),
-    [],
-  )
-
   return (
     <>
       <div className='SideContent-header'>

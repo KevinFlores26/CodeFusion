@@ -36,18 +36,6 @@ export default function useRenderMenus({ utilsIcons }) {
 
     removeClassItems(itemList, classNameActive, true)
     currentTarget.classList.add(classNameActive)
-
-    function removeClassItems(array, className, previous = false) {
-      const classNamePrevious = previous ? `${className}Previous` : ''
-
-      array.forEach((item) => {
-        if (previous) {
-          item.classList.contains(classNamePrevious) ? item.classList.remove(classNamePrevious) : ''
-          item.classList.contains(className) ? item.classList.add(classNamePrevious) : ''
-        }
-        item.classList.remove(className)
-      })
-    }
   }
 
   return {
@@ -57,4 +45,16 @@ export default function useRenderMenus({ utilsIcons }) {
     tooltipHandler,
     menusHandler,
   }
+}
+
+function removeClassItems(array, className, previous = false) {
+  const classNamePrevious = previous ? `${className}Previous` : ''
+
+  array.forEach((item) => {
+    if (previous) {
+      item.classList.contains(classNamePrevious) ? item.classList.remove(classNamePrevious) : ''
+      item.classList.contains(className) ? item.classList.add(classNamePrevious) : ''
+    }
+    item.classList.remove(className)
+  })
 }

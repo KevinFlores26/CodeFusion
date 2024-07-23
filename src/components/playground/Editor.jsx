@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
-import useCreateEditor from '@hooks/useCreateEditor'
+import { useState, useEffect, useRef } from 'react'
+import useEditor from '@hooks/playground/useEditor'
 import Split from 'react-split-grid'
 
 export default function Editor() {
@@ -12,32 +12,7 @@ export default function Editor() {
   const cssRef = useRef(null)
   const jsRef = useRef(null)
 
-  const DEFAULT_OPTIONS = useMemo(() => ({
-    automaticLayout: true,
-    theme: 'vs-dark',
-  }), [])
-
-  const htmlEditorProps = useMemo(() => ({
-    element: htmlRef.current,
-    value: '',
-    language: 'html',
-  }), [htmlRef.current])
-
-  const cssEditorProps = useMemo(() => ({
-    element: cssRef.current,
-    value: '',
-    language: 'css',
-  }), [cssRef.current])
-
-  const jsEditorProps = useMemo(() => ({
-    element: jsRef.current,
-    value: '',
-    language: 'javascript',
-  }), [jsRef.current])
-
-  let htmlEditor = useCreateEditor(htmlEditorProps, DEFAULT_OPTIONS)
-  let cssEditor = useCreateEditor(cssEditorProps, DEFAULT_OPTIONS)
-  let jsEditor = useCreateEditor(jsEditorProps, DEFAULT_OPTIONS)
+  const [ htmlEditor, cssEditor, jsEditor, createDocument ] = useEditor({ htmlRef, cssRef, jsRef })
 
   useEffect(() => {
     if (!(htmlEditor && cssEditor && jsEditor)) return
@@ -48,25 +23,8 @@ export default function Editor() {
   }, [htmlEditor, cssEditor, jsEditor])
 
   useEffect(() => {
-    const createDocument = () => `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <style>
-          ${css}
-        </style>
-        <script type="module">
-          ${js}
-        </script>
-      </head>
-      <body>
-        ${html}
-      </body>
-    </html>
-    `
-    
-    setOutput(createDocument())
-  }, [html, css, js])
+    setOutput(createDocument(html, css, js))
+  }, [html, css, js, createDocument])
 
   return (
     <Split
