@@ -27,7 +27,7 @@ export default function SideBar() {
     { name: 'Export', icon: <BiExport className='Sidebar-icon' /> },
     { name: 'Import', icon: <BiImport className='Sidebar-icon' /> },
   ]
-  
+
   const preferencesIcons = [
     { name: 'Home', icon: <BiHome className='Sidebar-icon' /> },
     { name: 'User', icon: <BiUserCircle className='Sidebar-icon' /> },
@@ -73,7 +73,12 @@ export default function SideBar() {
       </div>
 
       <div className={`Sidebar-content SideContent ${contentBar ? 'is-active' : ''}`}>
-        <div className='SideContent-content'>{contentHandler()}</div>
+        <div
+          className={`SideContent-content --${activeMenu.split('-').pop()}`}
+          data-current-menu={activeMenu.split('-').pop()}
+        >
+          {contentHandler()}
+        </div>
       </div>
     </aside>
   )

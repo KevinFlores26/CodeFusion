@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  gap: 1rem;
 
   & .ExplorerContent-files {
     display: flex;
@@ -104,7 +105,7 @@
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  height: calc(30% - 0.5rem);
+  min-height: 7.5rem;
 
   & .ExplorerRecent-list {
     display: flex;

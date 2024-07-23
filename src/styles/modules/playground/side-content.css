@@ -19,14 +19,16 @@
     padding 0.5s ease-out;
 
   & .SideContent-content {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     width: 16.75rem;
     height: 100%;
     opacity: 0;
-    transition:
-      opacity 0.3s ease-out;
+    overflow-x: initial;
+    overflow-y: auto;
+    transition: opacity 0.3s ease-out;
 
     & .SideContent-strong {
       font-weight: 600;
