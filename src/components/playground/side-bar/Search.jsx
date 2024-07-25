@@ -1,5 +1,5 @@
-import SideHeading from '@components/playground/side-bar/SideHeading.jsx'
-import SearchList from '@components/playground/templates/SearchList'
+import SideHeading from './SideHeading'
+import SearchList from '../templates/SearchList'
 import {
   BiLogInCircle,
   BiLogoHtml5,

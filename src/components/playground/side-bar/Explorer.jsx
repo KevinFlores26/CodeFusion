@@ -1,6 +1,5 @@
-import ExplorerFiles from '@components/playground/templates/ExplorerFiles'
-import filesSample from '@components/playground/templates/filesSample'
-import SideHeading from '@components/playground/side-bar/SideHeading'
+import ExplorerFiles from '../templates/ExplorerFiles'
+import SideHeading from './SideHeading'
 import Button from '@components/Button'
 import { BiRightArrow, BiTimeFive } from 'react-icons/bi'
 

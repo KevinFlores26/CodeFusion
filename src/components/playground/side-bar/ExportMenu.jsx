@@ -1,4 +1,4 @@
-import SideHeading from '@components/playground/side-bar/SideHeading'
+import SideHeading from './SideHeading'
 import Button from '@components/Button'
 import {
   BiClipboard,

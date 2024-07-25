@@ -1,5 +1,5 @@
-import SideHeading from '@components/playground/side-bar/SideHeading'
-import PackagesResult from '@components/playground/templates/PackagesResult'
+import SideHeading from './SideHeading'
+import PackagesResult from '../templates/PackagesResult'
 import { BiLogInCircle, BiFoodMenu, BiTimeFive } from 'react-icons/bi'
 
 export default function Packages() {

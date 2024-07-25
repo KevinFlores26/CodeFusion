@@ -1,5 +1,5 @@
-import ConsoleSummary from '@components/playground/templates/ConsoleSummary'
-import ConsoleOutput from '@components/playground/templates/ConsoleOutput'
+import ConsoleSummary from '../templates/ConsoleSummary'
+import ConsoleOutput from '../templates/ConsoleOutput'
 import { BiInfoCircle, BiCircle, BiError, BiXCircle } from 'react-icons/bi'
 
 const OUTPUT_TYPES = {

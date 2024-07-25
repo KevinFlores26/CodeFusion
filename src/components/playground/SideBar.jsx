@@ -1,10 +1,10 @@
 import useSideMenusHandler from '@hooks/playground/useSideMenusHandler'
-import Search from '@components/playground/side-bar/Search'
-import Explorer from '@components/playground/side-bar/Explorer'
-import Packages from '@components/playground/side-bar/Packages'
-import Console from '@components/playground/side-bar/Console'
-import ExportMenu from '@components/playground/side-bar/ExportMenu'
-import ImportMenu from '@components/playground/side-bar/ImportMenu'
+import Search from './side-bar/Search'
+import Explorer from './side-bar/Explorer'
+import Packages from './side-bar/Packages'
+import Console from './side-bar/Console'
+import ExportMenu from './side-bar/ExportMenu'
+import ImportMenu from './side-bar/ImportMenu'
 
 import {
   BiFileBlank,

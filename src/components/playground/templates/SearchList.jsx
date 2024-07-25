@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
-import SearchResult from '@components/playground/templates/SearchResult'
+import SearchResult from './SearchResult'
 
 // Temp: Just a template
 export default function SearchList({ keyword, line, icon, iterations = 1 }) {

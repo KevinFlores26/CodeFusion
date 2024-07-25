@@ -10,11 +10,19 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      /*
+      * Might be used when the file target is not in the same dir
+      * or when it's in the root of the same @dir
+      * Otherwise use common relatives paths instead
+      */
       '@public': fileURLToPath(new URL('./public', import.meta.url)),
       '@src': fileURLToPath(new URL('./src', import.meta.url)),
       '@hooks': fileURLToPath(new URL('./src/hooks', import.meta.url)),
       '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
       '@styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
+      '@store': fileURLToPath(new URL('./src/store', import.meta.url)),
+      '@utils': fileURLToPath(new URL('./src/utils', import.meta.url)),
+      '@db': fileURLToPath(new URL('./src/db', import.meta.url)),
     },
   },
   plugins: [react()],
