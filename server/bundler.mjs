@@ -1,6 +1,6 @@
 import { build } from 'esbuild'
 import { resolvePath } from '../src/utils/utils.js'
-import regex from '../src/utils/regex.js'
+import regex from '../src/utils/objects.js'
 
 export default async function bundleFiles(objectEntry, assets, bundle = true) {
   if (!objectEntry) return null

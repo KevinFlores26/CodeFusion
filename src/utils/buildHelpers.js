@@ -1,6 +1,6 @@
 import { getProjectsBy, getFilesBy } from '@db/idb/playground/crud'
 import { resolvePath } from '@utils/utils'
-import regex from '@utils/regex'
+import { regex } from '@utils/objects'
 import useBuildStore from '@store/useBuildStore'
 
 // setupBuilds() Helpers
@@ -71,7 +71,7 @@ export async function shouldRebuild(fileId, prevBuilds) {
   return await evaluateBuilds(prevBuilds) // => boolean
 
   async function evaluateBuilds(prevBuilds) {
-    if (file.name.split('.').pop() !== 'html') return true
+    if (file.ext !== 'html') return true
     const targetBuild = prevBuilds?.find((build) => build.referenceData.htmlId === file.id)
 
     if (!targetBuild) return true
@@ -123,15 +123,15 @@ export async function shouldRebuild(fileId, prevBuilds) {
           script: new RegExp(`<script .*?data-bundling-path=["']${path}["'][\\s\\S]*?<\\/script>`),
           style: new RegExp(`<style .*?data-bundling-path=["']${path}["'][\\s\\S]*?<\\/style>`),
         }
-  
+
         const type = path.split('.').pop()
         const correctRegex = type === 'css' ? replaceRegex.style : replaceRegex.script
-  
+
         if (doc.match(correctRegex)) {
           updateDocument(doc.replace(correctRegex, ''))
           const pathSplit = 'temp-out-esbuild'
           const indexToRemove = files.findIndex((file) => file.path.split(pathSplit).pop().replace('\\', '/') === path)
-  
+
           if (indexToRemove !== -1) files.splice(indexToRemove, 1)
         }
       }

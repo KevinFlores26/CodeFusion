@@ -40,7 +40,7 @@ export default function Editor({ editorId }) {
     <div
       className='Root-editor'
       data-editor-id={editorId}
-      data-language={editorData?.type || null}
+      data-extension={editorData?.ext || null}
       data-file-id={editorData?.id || null}
       data-filename={editorData?.name || null}
       data-filepath={editorData?.path || null}

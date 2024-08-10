@@ -30,8 +30,8 @@ const useBuildStore = create((set) => ({
 // Helpers
 async function setupBuilds() {
   const { project, files } = await getProjectFiles()
-  const htmlFiles = files.filter((file) => file.type === 'html')
-  const assets = files.filter((file) => file.type !== 'html')
+  const htmlFiles = files.filter((file) => file.ext === 'html')
+  const assets = files.filter((file) => file.ext !== 'html')
 
   try {
     const entryPoints = await getEntryPoints(project, htmlFiles)

@@ -1,5 +1,6 @@
 import { playgroundDb as db } from '../db'
 import { getFile, createProject } from './crud'
+import { mimeTypes } from '@utils/objects'
 
 // Initialize
 export default async function initdb(projectSearchDone = false) {
@@ -73,6 +74,55 @@ export function validProps(props, availableProps) {
 
   if (valids.length === 0) throw new Error('invalid changes: ', props)
   return valids
+}
+
+export function nameExtChainUpdate(prop, value, file, isDir = false) {
+  /**
+   * Helper function to update the name, ext and path
+   * @param {string} prop - name or extension
+   * @param {string} value - new value
+   * @param {object} file - file object
+   * @param {boolean} isDir - if the file is a directory
+   * @returns {object} updated object
+   */
+
+  if (isDir) {
+    const path = file.path.split('/').slice(0, -1).join('/')
+    const newPath = path + '/' + value
+
+    return { name: value, ext: null, type: 'directory', path: newPath }
+  }
+
+  const newName = prop === 'name' ? value : file.name.split('.')[0].concat('.' + value)
+  const newExt = prop === 'ext' ? value : file.name.split('.').pop()
+  const newType = mimeTypes[newExt]
+  const path = file.path.split('/').slice(0, -1).join('/')
+  const newPath = path + '/' + newName
+
+  return { name: newName, ext: newExt, type: newType, path: newPath }
+}
+
+export async function pathChainUpdate(reqPath, file, parent) {
+  /**
+   * Helper function to update the path and its parent directories
+   * @param {string} reqPath - new path
+   * @param {object} file - file object
+   * @param {object} parent - parent object
+   * @returns {object} updated object
+   */
+
+  let newPath = reqPath
+  if (newPath.split('.').length > 0) {
+    const path = newPath.split('/').slice(0, -1).join('/')
+    newPath = path + '/' + file.name
+  }
+  
+  const updatedChildren = parent.children.filter((childId) => childId !== file.id)
+  await db.file.update(parent.id, { children: updatedChildren })
+  const newParent = await db.file.where('path').equals(newPath.split('/').slice(0, -1).join('/')).first()
+  await db.file.update(newParent.id, { children: [...newParent.children, file.id] })
+
+  return { path: newPath, parentId: newParent?.id }
 }
 
 export async function getAnyBy(objectStore, valids, first) {

@@ -1,6 +1,7 @@
 import { playgroundDb as db } from '../db'
 import { Project, File } from './models'
-import initdb, { assignEditors, validProps, getAnyBy, catchError } from './utils'
+import initdb, { assignEditors, validProps, getAnyBy, catchError, nameExtChainUpdate, pathChainUpdate } from './utils'
+import { mimeTypes } from '@utils/objects'
 
 // Projects CRUD
 export async function createProject(name, description, author, origin = null, activeEditors = []) {
@@ -22,9 +23,9 @@ export async function createProject(name, description, author, origin = null, ac
     const newProject = new Project(name, description, author, origin, currentDate, currentDate, activeEditors)
     const id = await db.projects.add(newProject)
 
-    const htmlId = await createFile('index.html', 'html', null, id)
-    const cssId = await createFile('style.css', 'css', null, id)
-    const jsId = await createFile('script.js', 'js', null, id)
+    const htmlId = await createFile('index.html', null, id)
+    const cssId = await createFile('style.css', null, id)
+    const jsId = await createFile('script.js', null, id)
     console.log('htmlId, cssId, jsId', htmlId, cssId, jsId)
 
     if (htmlId && cssId && jsId) {
@@ -118,7 +119,7 @@ export async function deleteProject(id) {
 }
 
 // Files CRUD
-export async function createFile(name, type, parentId, projectId, content = '') {
+export async function createFile(name, parentId, projectId, isDir = false, content = '') {
   /**
    * Creates a file
    * @param {string} name - name of the file
@@ -130,11 +131,18 @@ export async function createFile(name, type, parentId, projectId, content = '') 
    * @returns {int} id of the created file
    */
 
+  const dirType = 'directory'
+
+  const ext = isDir ? null : name.split('.').pop()
+  const type = isDir ? dirType : mimeTypes[ext]
+  const contentFile = isDir ? null : content
+  const childrenDir = isDir ? [] : null
+
   try {
     const parent = typeof parentId === 'number' ? await getFile(parentId) : null
     const path = parentId === null ? `/${name}` : `${parent?.path}/${name}`
 
-    const newFile = new File(name, path, type, parentId, projectId, content, [])
+    const newFile = new File(name, path, ext, type, parentId, projectId, contentFile, childrenDir)
     const id = await db.files.add(newFile)
 
     if (parentId !== null && parent) {
@@ -144,7 +152,7 @@ export async function createFile(name, type, parentId, projectId, content = '') 
 
     return id
   } catch (err) {
-    console.error(catchError('Error creating file ', { name, type, parentId, projectId, content }, err))
+    console.error(catchError('Error creating file ', { name, parentId, projectId, isDir, content }, err))
   }
 }
 
@@ -201,10 +209,31 @@ export async function updateFile(id, changes) {
    * @returns {void}
    */
 
-  const availableChanges = ['name', 'path', 'type', 'parentId', 'content', 'children']
+  const availableChanges = ['name', 'path', 'ext', 'content']
+  const valids = validProps(changes, availableChanges)
+  const validedProps = Object.keys(valids)
+  let incomingChanges = valids
 
   try {
-    await db.files.update(id, validProps(changes, availableChanges))
+    const file = await db.files.get(id)
+
+    if (validedProps.length > 0) {
+      for (const prop of validedProps) {
+        const value = valids[prop]
+
+        if (prop === 'name' || prop === 'ext') {
+          const isTypeDir = file.type === 'directory' ? true : false
+          incomingChanges = nameExtChainUpdate(prop, value, file, isTypeDir)
+        } else if (prop === 'path') {
+          const parent = await db.files.get(file.parentId)
+          incomingChanges = await pathChainUpdate(value, file, parent)
+        } else if (prop === 'content') {
+          incomingChanges = { content: value }
+        }
+      }
+    }
+
+    await db.files.update(id, incomingChanges)
   } catch (err) {
     console.error(catchError('Error updating file ', id, err))
   }

@@ -4,7 +4,7 @@ import useBuildStore from '@store/useBuildStore'
 import useEditorStore from '@store/useEditorStore'
 import useOutputStore from '@store/useOutputStore'
 import { useLiveQuery } from 'dexie-react-hooks'
-import regex from '@utils/regex'
+import { regex } from '@utils/objects'
 
 const projectName = localStorage.getItem('projectName')
 let viewChanged = false
@@ -33,7 +33,7 @@ export default function Output() {
   }, [setCurrentView])
 
   useEffect(() => {
-    const htmlEditor = editors.find((editor) => editor.name.split('.').pop() === 'html')
+    const htmlEditor = editors.find((editor) => editor.ext === 'html')
     setCurrentView(htmlEditor?.path || '/index.html')
   }, [editors, setCurrentView])
 

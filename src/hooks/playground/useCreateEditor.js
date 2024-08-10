@@ -27,8 +27,6 @@ const DEFAULT_OPTIONS = {
   automaticLayout: true,
   theme: 'vs-dark',
 }
-
-const javascriptBased = ['js', 'ts', 'jsx', 'tsx', 'vue']
 localStorage.setItem('editorsLeft', 3)
 
 export default function useCreateEditor(containerRef, editorId) {
@@ -41,12 +39,12 @@ export default function useCreateEditor(containerRef, editorId) {
 
     async function createEditor() {
       const file = await getFile(memoEditor.id)
-      const content = file.content || ''
-      const type = file.type || 'txt'
+      const content = file?.content || ''
+      const type = file?.type.split('/').pop() || 'txt'
 
       const newEditor = monaco.editor.create(currentEditor, {
         value: content,
-        language: javascriptBased.includes(type) ? 'javascript' : type,
+        language: type,
         ...DEFAULT_OPTIONS,
       })
 

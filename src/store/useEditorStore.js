@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { getProjectsBy } from '@db/idb/playground/crud'
+import { mimeTypes } from '@utils/objects'
 
 // Store
 const storedEditors = await setupEditors()
@@ -38,9 +39,9 @@ async function setupEditors() {
 function editorsFallback() {
   const editorsBase = [
     // id: id of the file
-    { id: 1, path: '/index.html', name: 'index.html', type: 'html', parentId: null, projectid: 2 },
-    { id: 2, path: '/style.css', name: 'style.css', type: 'css', parentId: null, projectid: 1 },
-    { id: 3, path: '/script.js', name: 'script.js', type: 'js', parentId: null, projectid: 1 },
+    { id: 1, path: '/index.html', name: 'index.html', ext: 'html', type: mimeTypes['html'], parentId: null, projectid: 1 },
+    { id: 2, path: '/style.css', name: 'style.css', ext: 'css', type: mimeTypes['css'], parentId: null, projectid: 1 },
+    { id: 3, path: '/script.js', name: 'script.js', ext: 'js', type: mimeTypes['js'], parentId: null, projectid: 1 },
   ]
   return editorsBase
 }

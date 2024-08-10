@@ -17,9 +17,10 @@ export class Project {
 }
 
 export class File {
-  constructor(name, path, type, parentId, projectId, content = '', children = []) {
+  constructor(name, path, ext, type, parentId, projectId, content = '', children = []) {
     this.name = name
     this.path = path
+    this.ext = ext
     this.type = type
     this.parentId = parentId
     this.projectId = projectId
