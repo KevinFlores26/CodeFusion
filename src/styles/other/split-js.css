@@ -15,7 +15,7 @@
 }
 
 .gutter-col {
-  background-image: url('/public/img/dragger-y.png');
+  background-image: url('/img/dragger-y.png');
   grid-row: 1/-1;
   cursor: col-resize;
 }
@@ -25,25 +25,11 @@
 }
 
 .gutter-row {
-  background-image: url('/public/img/dragger-x.png');
+  background-image: url('/img/dragger-x.png');
   grid-column: 1/-1;
   cursor: row-resize;
 }
 
 .gutter-row-1 {
   grid-row: 2;
-}
-
-/* 
-* React Split CSS
-*/
-.gutter {
-  background-color: #eee;
-  background-repeat: no-repeat;
-  background-position: 50%;
-}
-
-.gutter.gutter-vertical {
-  background-image: url('/public/img/dragger-x.png');
-  cursor: row-resize;
 }

@@ -65,7 +65,7 @@ export default function SideBar() {
   }
 
   return (
-    <aside className='Sidebar'>
+    <aside className='Root-sidebar Sidebar'>
       <div className='Sidebar-menus'>
         <ul className='Sidebar-list Sidebar-utils'>{renderItem(utilsIcons)}</ul>
         <ul className='Sidebar-list Sidebar-preferences'>{renderItem(preferencesIcons)}</ul>

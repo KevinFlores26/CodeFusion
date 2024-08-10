@@ -1,55 +1,57 @@
-import { useState, useEffect, useRef } from 'react'
-import useEditor from '@hooks/playground/useEditor'
-import Split from 'react-split-grid'
+import React, { useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { updateFile } from '@db/idb/playground/crud'
+import useBuildStore from '@store/useBuildStore'
+import useEditorStore from '@store/useEditorStore'
+import useCreateEditor from '@hooks/playground/useCreateEditor'
+import debounce from 'lodash.debounce'
 
-export default function Editor() {
-  const [html, setHtml] = useState('')
-  const [css, setCss] = useState('')
-  const [js, setJs] = useState('')
-  const [output, setOutput] = useState('')
-
-  const htmlRef = useRef(null)
-  const cssRef = useRef(null)
-  const jsRef = useRef(null)
-
-  const [ htmlEditor, cssEditor, jsEditor, createDocument ] = useEditor({ htmlRef, cssRef, jsRef })
+export default function Editor({ editorId }) {
+  const containerRef = useRef(null)
+  const editorData = useEditorStore((state) => state.editors[editorId])
+  const setBuilds = useBuildStore((state) => state.setBuilds)
+  const editorInstance = useCreateEditor(containerRef, editorId)
 
   useEffect(() => {
-    if (!(htmlEditor && cssEditor && jsEditor)) return
+    async function updateEditor() {
+      try {
+        const editor = await editorInstance.current
+        if (!editor) return
 
-    htmlEditor.onDidChangeModelContent(() => setHtml(htmlEditor.getValue()))
-    cssEditor.onDidChangeModelContent(() => setCss(cssEditor.getValue()))
-    jsEditor.onDidChangeModelContent(() => setJs(jsEditor.getValue()))
-  }, [htmlEditor, cssEditor, jsEditor])
+        editor.onDidChangeModelContent(() => onChangeHandler(editorData.id, editor.getValue()))
+      } catch (err) {
+        console.error('error initializing editor: ', err)
+      }
 
-  useEffect(() => {
-    setOutput(createDocument(html, css, js))
-  }, [html, css, js, createDocument])
+      const debouncedFile = debounce(async (id, changes) => {
+        await updateFile(id, changes)
+        setBuilds(id)
+      }, 500)
+
+      async function onChangeHandler(fileId, value) {
+        await debouncedFile(fileId, { content: value })
+      }
+    }
+
+    updateEditor()
+  }, [editorInstance, editorData.id, setBuilds])
 
   return (
-    <Split
-      render={({ getGridProps, getGutterProps }) => (
-        <div className='Root-grid u-grid' {...getGridProps()}>
-          <div className='Root-editor'>
-            <div ref={htmlRef} id='html'></div>
-          </div>
-          <div
-            className='gutter-col gutter-col-1'
-            {...getGutterProps('column', 1)}
-          />
-          <div className='Root-editor'>
-            <div ref={cssRef} id='css'></div>
-          </div>
-          <div className='Root-editor'>
-            <div ref={jsRef} id='javascript'></div>
-          </div>
-          <div
-            className='gutter-row gutter-row-1'
-            {...getGutterProps('row', 1)}
-          />
-          <iframe className='Root-output' srcDoc={output}></iframe>
-        </div>
-      )}
-    />
+    <div
+      className='Root-editor'
+      data-editor-id={editorId}
+      data-language={editorData?.type || null}
+      data-file-id={editorData?.id || null}
+      data-filename={editorData?.name || null}
+      data-filepath={editorData?.path || null}
+    >
+      <div ref={containerRef}>{/* Monaco editor instance here */}</div>
+    </div>
   )
 }
+
+Editor.propTypes = {
+  editorId: PropTypes.number.isRequired,
+}
+
+export const MemoEditor = React.memo(Editor)

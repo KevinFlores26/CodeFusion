@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import getCurrentDir from '@utils/getCurrentDir'
 import {
   BiSolidFolder,
   BiSolidFolderOpen,
@@ -12,21 +13,18 @@ import {
   BiLogoReact,
 } from 'react-icons/bi'
 
-export default function ExplorerFiles({ structureObject }) {
-  const icons = useMemo(
-    () => ({
-      '/': <BiSolidFolder className='ExplorerList-icon' />,
-      txt: <BiFile className='ExplorerList-icon' />,
-      json: <BiSolidFileJson className='ExplorerList-icon' />,
-      html: <BiLogoHtml5 className='ExplorerList-icon' />,
-      css: <BiLogoCss3 className='ExplorerList-icon' />,
-      js: <BiLogoJavascript className='ExplorerList-icon' />,
-      ts: <BiLogoTypescript className='ExplorerList-icon' />,
-      jsx: <BiLogoReact className='ExplorerList-icon' />,
-    }),
-    [],
-  )
+const icons = {
+  '/': <BiSolidFolder className='ExplorerList-icon' />,
+  txt: <BiFile className='ExplorerList-icon' />,
+  json: <BiSolidFileJson className='ExplorerList-icon' />,
+  html: <BiLogoHtml5 className='ExplorerList-icon' />,
+  css: <BiLogoCss3 className='ExplorerList-icon' />,
+  js: <BiLogoJavascript className='ExplorerList-icon' />,
+  ts: <BiLogoTypescript className='ExplorerList-icon' />,
+  jsx: <BiLogoReact className='ExplorerList-icon' />,
+}
 
+export default function ExplorerFiles({ structureObject }) {
   const [itemsArray, setItemsArray] = useState(null)
   useEffect(() => {
     function createArray(obj, index = [0]) {
@@ -48,24 +46,9 @@ export default function ExplorerFiles({ structureObject }) {
 
           if (level > 0) {
             // Get the path in levels of depth > 0
-            let subIndex = [...index.slice(0, -1)]
-
-            let itemPath = subIndex.reduce((acc, i, it) => {
-              if (it === 0) {
-                const initialPath = initialKeys[i].toString()
-                acc.push([initialPath])
-              } else {
-                const currentPath = acc.reduce((subAcc, key) => subAcc[key], obj)
-                const newKeys = Object.keys(currentPath)
-                const path = newKeys[i].toString()
-                acc.push([path])
-              }
-
-              return acc
-            }, [])
-
-            value = itemPath.reduce((acc, path) => acc[path], obj)
-            value = value[key] // It equals to obj['dir']['dir2']...['file'] otherwise it wouldn't work
+            const subIndex = [...index.slice(0, -1)]
+            const dir = getCurrentDir(subIndex, obj)
+            value = dir[key]
           }
 
           if (value === null) continue
@@ -106,10 +89,8 @@ export default function ExplorerFiles({ structureObject }) {
           if (typeof value === 'object') {
             currentItems.push(item)
             currentDirs.push(value)
-            console.log(`folder created "${key}-${index.join('.')} at level ${level}: "`, currentItems)
           } else if (typeof value === 'string') {
             currentItems.push(item)
-            console.log(`file created "${key}-${index.join('.')} at level ${level}: "`, currentItems)
           }
 
           if (i === keys.length - 1) {
@@ -161,7 +142,7 @@ export default function ExplorerFiles({ structureObject }) {
       setItemsArray(resultArray) // [[{}, {}...], [{}, {}], ...]
     }
 
-    createArray(structureObject.root)
+    createArray(structureObject[0].root)
     return () => setItemsArray(null)
   }, [structureObject])
 
@@ -190,10 +171,7 @@ export default function ExplorerFiles({ structureObject }) {
                 <strong className='ExplorerList-folderName'>{dir.name.replace(/\/$/, '')}</strong>
               </div>
 
-              <ul
-                className='ExplorerList-list'
-                data-index={dir.index}
-              >
+              <ul className='ExplorerList-list' data-index={dir.index}>
                 {renderFiles(biArray[currentSubArray])}
               </ul>
             </li>
@@ -230,11 +208,11 @@ export default function ExplorerFiles({ structureObject }) {
     if (itemsArray && itemsArray.length > 0) renderItems(itemsArray)
 
     return () => setRenderedElements(null)
-  }, [icons, itemsArray])
+  }, [itemsArray])
 
   return <>{renderedElements}</>
 }
 
 ExplorerFiles.propTypes = {
-  structureObject: PropTypes.object,
+  structureObject: PropTypes.array.isRequired,
 }

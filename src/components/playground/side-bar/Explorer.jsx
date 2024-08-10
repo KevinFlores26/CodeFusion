@@ -1,6 +1,7 @@
 import ExplorerFiles from '../templates/ExplorerFiles'
 import SideHeading from './SideHeading'
 import Button from '@components/Button'
+import initialProjectStructure from '@utils/initialProjectStructure'
 import { BiRightArrow, BiTimeFive } from 'react-icons/bi'
 
 export default function Explorer() {
@@ -13,11 +14,11 @@ export default function Explorer() {
 
       <div className='SideContent-body ExplorerContent'>
         <section className='ExplorerContent-files'>
-          <ExplorerFiles structureObject={filesSample()} />
-  
+          <ExplorerFiles structureObject={JSON.parse(localStorage.getItem('projectStructure')) || initialProjectStructure} />
+
           <div className='ExplorerContent-recent ExplorerRecent'>
             <SideHeading icon={<BiTimeFive className='SideContent-headingIcon' />} title='Recent files' />
-  
+
             <ul className='ExplorerRecent-list'>
               <li>
                 <i>{/* temp: icon file */}</i>
